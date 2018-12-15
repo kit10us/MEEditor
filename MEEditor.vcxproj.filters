@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="MEEditor.cpp" />
+    <ClCompile Include="meedr\ResourceBrowser.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\InputBrowser.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\ScriptEditor.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\SceneViewer.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\LogViewer.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\ComponentViewer.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\OpenEditorAction.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+    <ClCompile Include="meedr\ActionsComponent.cpp">
+      <Filter>meedr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MEEditor.h" />
+    <ClInclude Include="meedr\ResourceBrowser.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\InputBrowser.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\ScriptEditor.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\SceneViewer.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\LogViewer.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\ComponentViewer.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\OpenEditorAction.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+    <ClInclude Include="meedr\ActionsComponent.h">
+      <Filter>meedr</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="meedr">
+      <UniqueIdentifier>{1c9a8768-f165-448d-aa3e-54a5f70133bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
