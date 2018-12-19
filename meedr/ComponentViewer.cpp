@@ -225,10 +225,14 @@ void ComponentViewer::UpdateComponentValues()
 		{
 			break;
 		}
-		for ( int index = 0; index < component->GetValueCount(); index++ )
+
+		int i = 0;
+		auto begin = component->GetLookup()->begin();
+		auto end = component->GetLookup()->end();
+		for ( auto itr = begin; itr != end; itr++ )
 		{
-			valuesList->InsertItem( 0, index, unify::Cast< std::wstring >( component->GetValue( index ) ) );
-			valuesList->InsertItem( 1, index, unify::Cast< std::wstring >( component->GetValueName( index ) ) );
+			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
 		}
 		break;
 	}
@@ -240,10 +244,13 @@ void ComponentViewer::UpdateComponentValues()
 		{
 			break;
 		}
-		for (int index = 0; index < component->GetValueCount(); index++)
+		int i = 0;
+		auto begin = component->GetLookup()->begin();
+		auto end = component->GetLookup()->end();
+		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem(0, index, unify::Cast< std::wstring >(component->GetValue(index)));
-			valuesList->InsertItem(1, index, unify::Cast< std::wstring >(component->GetValueName(index)));
+			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
 		}
 		break;
 	}
@@ -256,10 +263,13 @@ void ComponentViewer::UpdateComponentValues()
 		{
 			break;
 		}
-		for ( int index = 0; index < component->GetValueCount(); index++ )
+		int i = 0;
+		auto begin = component->GetLookup()->begin();
+		auto end = component->GetLookup()->end();
+		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem( 0, index, unify::Cast< std::wstring >( component->GetValue( index ) ) );
-			valuesList->InsertItem( 1, index, unify::Cast< std::wstring >( component->GetValueName( index ) ) );
+			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
 		}
 		break;
 	}
@@ -277,10 +287,13 @@ void ComponentViewer::UpdateComponentValues()
 		}
 
 		auto component = object->GetComponent( componentIndex );
-		for ( int index = 0; index < component->GetValueCount(); index++ )
+		int i = 0;
+		auto begin = component->GetLookup()->begin();
+		auto end = component->GetLookup()->end();
+		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem( 0, index, unify::Cast< std::wstring >( component->GetValue( index ) ) );
-			valuesList->InsertItem( 1, index, unify::Cast< std::wstring >( component->GetValueName( index ) ) );
+			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
 		}
 		break;
 	}
@@ -427,7 +440,7 @@ ui::IResult* ComponentViewer::OnNotify( ui::message::Notify message )
 			}	
 
 			int valueIndex = info.item.iItem;
-			component->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
+			//component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
 
 			return new Result( 1 );
 		}

@@ -429,10 +429,15 @@ void SceneViewer::UpdateObject_ComponentValues()
 
 	auto component = object->GetComponent( componentIndex );
 
-	for ( int i = 0; i < component->GetValueCount(); i++ )
 	{
-		values->InsertItem( 0, i, unify::Cast< std::wstring >( component->GetValue( i ) ) );
-		values->InsertItem( 1, i, unify::Cast< std::wstring >( component->GetValueName( i ) ) );
+		size_t i = 0;
+		auto end = component->GetLookup()->end();
+		auto begin = component->GetLookup()->begin();
+		for( auto itr = begin; itr != end; ++itr )
+		{
+			values->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			values->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+		}
 	}
 }
 
@@ -463,9 +468,9 @@ void SceneViewer::OpenObjectComponent()
 		return;
 	}
 
-	if ( unify::StringIs( component->GetTypeName(), "LUAScript" ) )
+	if ( unify::string::StringIs( component->GetTypeName(), "LUAScript" ) )
 	{
-		unify::Path path( component->GetValue( "path" ) );
+		unify::Path path( component->GetLookup()->GetValue( "path" ) );
 		unify::Path fullPath( m_game->GetOS()->GetRunPath(), path );
 		fullPath.Normalize();
 		GetParent()->SendUserMessage( SCRIPTEDITOR_OPEN, message::Params{ 0, (LPARAM)fullPath.ToString().c_str() } );
@@ -723,7 +728,7 @@ ui::IResult* SceneViewer::OnNotify( ui::message::Notify message )
 			auto component = object->GetComponent( componentIndex );
 
 			int valueIndex = info.item.iItem;
-			component->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
+			component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
 
 			return new Result( 1 );
 		}
