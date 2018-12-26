@@ -10,6 +10,7 @@
 #include <meedr/LogViewer.h>
 #include <meedr/ComponentViewer.h>
 #include <wab/ui/Builder.h>
+#include <me/debug/Block.h>
 
 #include <Richedit.h>
 #include <ShObjIdl.h>
@@ -479,9 +480,7 @@ void SceneViewer::OpenObjectComponent()
 
 void SceneViewer::EditScene( bool edit )
 {
-	using namespace ui;
-
-	m_game->Debug()->LogLine( "SceneViewer::EditScene", unify::Cast< std::string >( edit ) );
+	me::debug::Block block( m_game->Debug(), "SceneViewer::EditScene" );
 
 	if ( edit )
 	{
@@ -492,6 +491,7 @@ void SceneViewer::EditScene( bool edit )
 		}
 		else
 		{
+			block.LogLine( "Enabling scene editing" );
 			m_editingLock = m_game->LockUpdate( false );
 		}
 	}
@@ -504,9 +504,12 @@ void SceneViewer::EditScene( bool edit )
 		}
 		else
 		{
+			block.LogLine( "Disabling scene editing" );
 			m_editingLock.reset();
 		}
 	}
+
+	using namespace ui;
 
 	auto editSceneButton = GetControl< Button* >( "EditScene" );
 	auto x = GetControl< Edit* >( "X" );
