@@ -38,7 +38,7 @@ extern "C" __declspec(dllexport) bool MELoader( me::game::IGame * gameInstance, 
 
 	{
 		auto component = new meedr::ActionsGameComponent();
-		gameInstance->AddComponent( me::game::IGameComponent::ptr( component ) );
+		gameInstance->AddComponent( me::game::component::IGameComponent::ptr( component ) );
 	}
 
 	me::input::InputManager * inputManager = gameInstance->GetInputManager();

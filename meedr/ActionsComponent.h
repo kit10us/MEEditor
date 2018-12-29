@@ -1,11 +1,11 @@
 // Copyright (c) 2002 - 2018, Evil Quail LLC
 // All Rights Reserved
 
-#include <me/game/GameComponent.h>
+#include <me/game/component/GameComponent.h>
 
 namespace meedr
 {
-	class ActionsGameComponent : public me::game::GameComponent
+	class ActionsGameComponent : public me::game::component::GameComponent
 	{
 	public:
 		static char* Name();
