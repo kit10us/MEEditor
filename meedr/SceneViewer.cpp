@@ -29,7 +29,7 @@ SceneViewer::SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstanc
 	, m_sceneManager{ dynamic_cast< me::scene::SceneManager* >( gameInstance->GetComponent( "SceneManager" ).get() ) }
 	, m_noScenes{ true }
 {
-	int nCmdShow = gameInstance->GetOSParameters().nCmdShow;
+	int nCmdShow = gameInstance->GetOS()->GetOSParameters()->nCmdShow;
 	RECT rect{};
 	::GetWindowRect( GetParentHandle(), &rect );
 	int x = rect.right;
