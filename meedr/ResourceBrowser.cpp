@@ -1,4 +1,4 @@
-// Copyright (c) 2002 - 2018, Evil Quail LLC
+// Copyright (c) 2002 - 2018, Kit10 Studios LLC
 // All Rights Reserved
 
 #include <meedr/SceneViewer.h>
@@ -89,7 +89,7 @@ void ResourceBrowser::OpenResource()
 	if ( source.Exists() )
 	{
 		char operation[] = "open";
-		source = m_game->GetOS()->GetRunPath() + source ;
+		source.Combine( m_game->GetOS()->GetOSParameters()->GetRunPath(), source );
 		HINSTANCE result = ShellExecuteA( GetHandle(), operation, source.ToString().c_str(), nullptr, nullptr, SW_SHOW );
 		switch( (int)result )
 		{

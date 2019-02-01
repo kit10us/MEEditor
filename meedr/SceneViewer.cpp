@@ -1,4 +1,4 @@
-// Copyright (c) 2002 - 2018, Evil Quail LLC
+// Copyright (c) 2002 - 2018, Kit10 Studios LLC
 // All Rights Reserved
 
 #include <wab/ui/Window.h>
@@ -472,7 +472,7 @@ void SceneViewer::OpenObjectComponent()
 	if ( unify::string::StringIs( component->GetTypeName(), "LUAScript" ) )
 	{
 		unify::Path path( component->GetLookup()->GetValue( "path" ) );
-		unify::Path fullPath( m_game->GetOS()->GetRunPath(), path );
+		unify::Path fullPath( m_game->GetOS()->GetOSParameters()->GetRunPath(), path );
 		fullPath.Normalize();
 		GetParent()->SendUserMessage( SCRIPTEDITOR_OPEN, message::Params{ 0, (LPARAM)fullPath.ToString().c_str() } );
 	}
