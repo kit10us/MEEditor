@@ -34,7 +34,7 @@ extern "C" __declspec(dllexport) bool MELoader( me::game::IGame * gameInstance, 
 	s_game = gameInstance;
 	s_ownership = unify::Owner::Create( "MEEditor" );
 
-	s_rootWindow.reset(new ui::Window((HWND)gameInstance->GetOS()->GetOSParameters()->hWnd));
+	s_rootWindow.reset(new ui::Window((HWND)gameInstance->GetOS()->GetOSParameters()->handle));
 
 	{
 		auto component = new meedr::ActionsGameComponent();
