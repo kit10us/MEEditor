@@ -7,6 +7,7 @@
 #include <meedr/ComponentViewer.h>
 #include <wab/ui/Window.h>
 #include <me/render/Geometry.h>
+#include <me/debug/Block.h>
 
 using namespace meedr;
 
@@ -337,7 +338,9 @@ ui::IResult * ComponentViewer::OnAfterCreate( ui::message::Params )
 
 ui::IResult * ComponentViewer::OnControlCommand( ui::message::ControlCommand message )
 {
-	using namespace ui;	
+	using namespace ui;
+	auto debug = m_game->Debug();
+	me::debug::Block parent( debug, "ComponentViewer::OnControlCommand" );
 
 	if ( message.control )
 	{
