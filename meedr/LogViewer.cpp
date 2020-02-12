@@ -11,8 +11,9 @@
 
 using namespace meedr;
 
-LogViewer::LogViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game::IGame * gameInstance )
+LogViewer::LogViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game::IGame* gameInstance )
 	: Window( parent, L"LogViewerWndClass" )
+	, m_logListener( this )
 	, m_sceneViewer{ parent }
 	, m_game{ gameInstance }
 {
@@ -24,7 +25,7 @@ LogViewer::LogViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game:
 
 LogViewer::~LogViewer()
 {
-	m_game->Debug()->DetachLogListener( this );
+	m_game->Debug()->DetachLogListener( &m_logListener );
 }
 
 void LogViewer::Log( std::string text )
@@ -48,7 +49,7 @@ ui::IResult* LogViewer::OnAfterCreate( ui::message::Params params )
 
 	Richtext* logText = GetControl< Richtext* >( "LogText" );
 	logText->SetText( "" );
-	m_game->Debug()->AttachLogListener( this );
+	m_game->Debug()->AttachLogListener( &m_logListener );
 	return new Result( 0 );
 }
 
@@ -56,7 +57,7 @@ ui::IResult* LogViewer::OnDestroy( ui::message::Params params )
 {
 	using namespace ui;			  
 
-	m_game->Debug()->DetachLogListener( this );
+	m_game->Debug()->DetachLogListener( &m_logListener );
 	GetParent()->SendUserMessage( LOGVIEWER_CLOSED, message::Params{}  );
 	return new Result( 0 );
 }
