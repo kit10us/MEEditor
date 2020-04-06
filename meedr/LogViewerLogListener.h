@@ -4,6 +4,7 @@
 #pragma once
 
 #include <me/game/IGame.h>
+#include <kit/ILogListener.h>
 
 namespace meedr
 {
@@ -13,15 +14,13 @@ namespace meedr
 	/// An ILogListener, which binds the ILogListener interface to the LogViewer, 
 	/// removing the need for multiple inheritance.
 	/// </summary>
-	class LogViewerLogListener : public me::ILogListener
+	class LogViewerLogListener : public kit::ILogListener
 	{
+		LogViewer* m_logViewer;
 	public:
 		LogViewerLogListener( LogViewer* logViewer );
-		virtual ~LogViewerLogListener();
+		~LogViewerLogListener() override;
 
-		void Log( std::string text ) override;
-
-	private:
-		LogViewer* m_logViewer;
+		void LogEvent( const kit::LogEvent* event ) override;
 	};
 }

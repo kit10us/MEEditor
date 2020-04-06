@@ -15,10 +15,7 @@ LogViewerLogListener::~LogViewerLogListener()
 {
 }
 
-void LogViewerLogListener::Log( std::string text )
+void LogViewerLogListener::LogEvent( const kit::LogEvent* event )
 {
-	if (m_logViewer)
-	{
-		m_logViewer->Log( text );
-	}
+	m_logViewer->Log( event->text );
 }

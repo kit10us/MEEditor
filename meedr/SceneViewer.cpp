@@ -480,7 +480,8 @@ void SceneViewer::OpenObjectComponent()
 
 void SceneViewer::EditScene( bool edit )
 {
-	me::debug::Block block( m_game->Debug(), "SceneViewer::EditScene" );
+	auto debug = m_game->Debug();
+	auto block{ debug->MakeBlock( "SceneViewer::EditScene" ) };
 
 	if ( edit )
 	{
@@ -491,7 +492,7 @@ void SceneViewer::EditScene( bool edit )
 		}
 		else
 		{
-			block.LogLine( "Enabling scene editing" );
+			block->Log( "Enabling scene editing" );
 			m_editingLock = m_game->LockUpdate( false );
 		}
 	}
@@ -504,7 +505,7 @@ void SceneViewer::EditScene( bool edit )
 		}
 		else
 		{
-			block.LogLine( "Disabling scene editing" );
+			block->Log( "Disabling scene editing" );
 			m_editingLock.reset();
 		}
 	}

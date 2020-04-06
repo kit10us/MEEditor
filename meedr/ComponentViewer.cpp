@@ -340,7 +340,7 @@ ui::IResult * ComponentViewer::OnControlCommand( ui::message::ControlCommand mes
 {
 	using namespace ui;
 	auto debug = m_game->Debug();
-	me::debug::Block parent( debug, "ComponentViewer::OnControlCommand" );
+	auto parent( debug->MakeBlock( "ComponentViewer::OnControlCommand" ) );
 
 	if ( message.control )
 	{
