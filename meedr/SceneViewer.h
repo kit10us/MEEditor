@@ -20,6 +20,19 @@ namespace meedr
 {
 	class SceneViewer : public ui::Window
 	{
+		me::game::IGame* m_game;
+		int m_openChildren;
+		IWindow::ptr m_resourceBrowser;
+		IWindow::ptr m_inputBrowser;
+		IWindow::ptr m_scriptEditor;
+		IWindow::ptr m_logViewer;
+		IWindow::ptr m_componentViewer;
+		me::scene::SceneManager* m_sceneManager;
+		UINT_PTR m_timer;
+		me::UpdateLock::ptr m_editingLock;
+		bool m_noScenes;
+		kit::debug::IBlock::ptr m_block;
+
 	public:
 		SceneViewer::SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstance );
 		~SceneViewer();
@@ -53,18 +66,5 @@ namespace meedr
 		ui::IResult* OnMenuCommand( ui::message::MenuCommand message ) override;
 		ui::IResult* OnUser( ui::message::User message ) override;
 		ui::IResult* OnDestroy(ui::message::Params) override;
-
-	private:
-		me::game::IGame * m_game;
-		int m_openChildren;
-		IWindow::ptr m_resourceBrowser;
-		IWindow::ptr m_inputBrowser;
-		IWindow::ptr m_scriptEditor;
-		IWindow::ptr m_logViewer;
-		IWindow::ptr m_componentViewer;
-		me::scene::SceneManager * m_sceneManager;
-		UINT_PTR m_timer;
-		me::UpdateLock::ptr m_editingLock;
-		bool m_noScenes;
 	};
 }

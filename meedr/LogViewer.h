@@ -5,7 +5,7 @@
 
 #include <me/game/IGame.h>
 #include <wab/ui/Window.h>
-#include <kit/ILogListener.h>
+#include <kit/debug/ILogListener.h>
 
 namespace meedr
 {
@@ -14,7 +14,7 @@ namespace meedr
 	private:
 		me::game::IGame * m_game;
 		class SceneViewer*  m_sceneViewer;
-		kit::ILogListener::ptr m_logListener;
+		kit::debug::ILogListener::ptr m_logListener;
 
 	public:
 		LogViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game::IGame * gameInstance );

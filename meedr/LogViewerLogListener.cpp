@@ -15,7 +15,7 @@ LogViewerLogListener::~LogViewerLogListener()
 {
 }
 
-void LogViewerLogListener::LogEvent( const kit::LogEvent* event )
+void LogViewerLogListener::LogEvent( const kit::debug::LogEvent* event )
 {
 	m_logViewer->Log( event->text );
 }

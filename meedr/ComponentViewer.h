@@ -12,6 +12,7 @@ namespace meedr
 	{
 		me::game::IGame* m_game;
 		class SceneViewer* m_sceneViewer;
+		kit::debug::IBlock::ptr m_block;
 
 	public:
 		ComponentViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game::IGame * gameInstance );

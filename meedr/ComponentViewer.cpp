@@ -31,6 +31,7 @@ ComponentViewer::ComponentViewer( SceneViewer* parent, int nCmdShow, int x, int 
 	: Window( parent, L"ComponentViewerWndClass" )
 	, m_sceneViewer{ parent }
 	, m_game{ gameInstance }
+	, m_block{ gameInstance->Debug()->GetLogger()->CreateBlock( "ComponentViewer" ) }
 {
 
 	struct A {
@@ -340,7 +341,7 @@ ui::IResult * ComponentViewer::OnControlCommand( ui::message::ControlCommand mes
 {
 	using namespace ui;
 	auto debug = m_game->Debug();
-	auto parent( debug->MakeBlock( "ComponentViewer::OnControlCommand" ) );
+	auto block{ m_block->SubBlock( "OnControlCommand" ) };
 
 	if ( message.control )
 	{

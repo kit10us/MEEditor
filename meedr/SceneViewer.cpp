@@ -28,7 +28,10 @@ SceneViewer::SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstanc
 	, m_openChildren{ 0 } 	
 	, m_sceneManager{ dynamic_cast< me::scene::SceneManager* >( gameInstance->GetComponent( "SceneManager" ).get() ) }
 	, m_noScenes{ true }
+	, m_block{ gameInstance->Debug()->GetLogger()->CreateBlock( "SceneViewer" ) }
 {
+	auto block{ m_block->SubBlock( "ctor" ) };
+
 	int nCmdShow = gameInstance->GetOS()->GetOSParameters()->nCmdShow;
 	RECT rect{};
 	::GetWindowRect( GetParentHandle(), &rect );
@@ -481,7 +484,7 @@ void SceneViewer::OpenObjectComponent()
 void SceneViewer::EditScene( bool edit )
 {
 	auto debug = m_game->Debug();
-	auto block{ debug->MakeBlock( "SceneViewer::EditScene" ) };
+	auto block{ m_block->SubBlock( "EditScene" ) };
 
 	if ( edit )
 	{
