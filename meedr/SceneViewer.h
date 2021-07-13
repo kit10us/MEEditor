@@ -34,7 +34,7 @@ namespace meedr
 		kit::debug::IBlock::ptr m_block;
 
 	public:
-		SceneViewer::SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstance );
+		SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstance );
 		~SceneViewer();
 
 		me::game::IGame * GetGame() const;

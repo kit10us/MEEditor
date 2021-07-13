@@ -156,7 +156,8 @@ ui::IResult* ScriptEditor::OnControlCommand( ui::message::ControlCommand message
 		ofn.lpstrFilter = "LUA Scripts (*.lua)\0*.lua\0All Files(*.*)\0*.*\0\0";
 		ofn.lpstrFile = filename;
 		ofn.nMaxFile = 256;
-		ofn.lpstrFileTitle = "Open Script...";
+		char fileTitle[]{ "Open Script..." };
+		ofn.lpstrFileTitle = fileTitle;
 		ofn.Flags = OFN_FILEMUSTEXIST;
 		if ( GetOpenFileNameA( &ofn ) )
 		{

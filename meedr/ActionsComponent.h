@@ -8,7 +8,7 @@ namespace meedr
 	class ActionsGameComponent : public me::game::component::GameComponent
 	{
 	public:
-		static char* Name();
+		static const char* Name();
 
 		ActionsGameComponent();
 
