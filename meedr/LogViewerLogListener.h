@@ -22,5 +22,6 @@ namespace meedr
 		~LogViewerLogListener() override;
 
 		void LogEvent( const kit::debug::LogEvent* event ) override;
+		unify::Path GetPath() const override;
 	};
 }

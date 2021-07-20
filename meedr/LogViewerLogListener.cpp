@@ -19,3 +19,8 @@ void LogViewerLogListener::LogEvent( const kit::debug::LogEvent* event )
 {
 	m_logViewer->Log( event->text );
 }
+
+unify::Path LogViewerLogListener::GetPath() const
+{
+	return {};
+}
