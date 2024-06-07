@@ -439,8 +439,8 @@ void SceneViewer::UpdateObject_ComponentValues()
 		auto begin = component->GetLookup()->begin();
 		for( auto itr = begin; itr != end; ++itr )
 		{
-			values->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			values->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+			values->InsertItem( 0, (int)i, unify::Cast< std::wstring >( itr->value->ToString() ) );
+			values->InsertItem( 1, (int)i, unify::Cast< std::wstring >( itr->key ) );
 		}
 	}
 }

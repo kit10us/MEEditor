@@ -1,8 +1,7 @@
 // Copyright (c) 2002 - 2018, Kit10 Studios LLC
 // All Rights Reserved
 
-#include <Windows.h>
-
+#include <MEEditor.h>
 #include <meedr/SceneViewer.h>
 #include <meedr/ComponentViewer.h>
 #include <wab/ui/Window.h>

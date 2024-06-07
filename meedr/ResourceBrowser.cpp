@@ -91,13 +91,6 @@ void ResourceBrowser::OpenResource()
 		char operation[] = "open";
 		source.Combine( m_game->GetOS()->GetOSParameters()->GetRunPath(), source );
 		HINSTANCE result = ShellExecuteA( GetHandle(), operation, source.ToString().c_str(), nullptr, nullptr, SW_SHOW );
-		switch( (int)result )
-		{
-		case ERROR_FILE_NOT_FOUND:
-		{
-			break;
-		}
-		}
 	}
 }
 

@@ -5,7 +5,6 @@
 #include <meedr/SceneViewer.h>
 #include <meedr/ActionsComponent.h>
 #include <me/game/Game.h>
-#include <Windows.h>
 
 me::game::IGame * s_game;
 

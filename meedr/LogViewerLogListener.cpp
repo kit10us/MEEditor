@@ -15,9 +15,10 @@ LogViewerLogListener::~LogViewerLogListener()
 {
 }
 
-void LogViewerLogListener::LogEvent( const kit::debug::LogEvent* event )
+bool LogViewerLogListener::LogEvent( const kit::debug::LogEvent* event )
 {
 	m_logViewer->Log( event->text );
+	return true;
 }
 
 unify::Path LogViewerLogListener::GetPath() const
