@@ -40,7 +40,7 @@ ui::IResult* LogViewer::OnCreate( ui::message::Params params )
 {
 	using namespace ui;			  
 
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* LogViewer::OnAfterCreate( ui::message::Params params )
@@ -51,7 +51,7 @@ ui::IResult* LogViewer::OnAfterCreate( ui::message::Params params )
 	logText->SetText( "" );
 	m_logListener.reset( new LogViewerLogListener( this ) );
 	m_game->Debug()->GetLogger()->AttachListener( m_logListener );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* LogViewer::OnDestroy( ui::message::Params params )
@@ -64,7 +64,7 @@ ui::IResult* LogViewer::OnDestroy( ui::message::Params params )
 	}
 
 	GetParent()->SendUserMessage( LOGVIEWER_CLOSED, message::Params{}  );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* LogViewer::OnControlCommand( ui::message::ControlCommand message )

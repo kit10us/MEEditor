@@ -309,17 +309,14 @@ void ComponentViewer::GotoComponent( std::string type, int index )
 
 ui::IResult * ComponentViewer::OnCreate( ui::message::Params params )
 {
-	using namespace ui;			  
-
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ComponentViewer::OnDestroy( ui::message::Params params )
 {
-	using namespace ui;			  
 
-	GetParent()->SendUserMessage( COMPONENTVIEWER_CLOSED, message::Params{ 0, 0 } );
-	return new Result( 0 );
+	GetParent()->SendUserMessage( COMPONENTVIEWER_CLOSED, ui::message::Params{ 0, 0 } );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ComponentViewer::OnAfterCreate( ui::message::Params )
@@ -333,7 +330,7 @@ ui::IResult * ComponentViewer::OnAfterCreate( ui::message::Params )
 	valuesList->SetColumnOrderArray( 2, a );
 
 	UpdateComponentTypes();
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ComponentViewer::OnControlCommand( ui::message::ControlCommand message )
@@ -378,7 +375,7 @@ ui::IResult * ComponentViewer::OnControlCommand( ui::message::ControlCommand mes
 			break;
 		}
 	}
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }			
 
 ui::IResult* ComponentViewer::OnNotify( ui::message::Notify message )
@@ -445,10 +442,10 @@ ui::IResult* ComponentViewer::OnNotify( ui::message::Notify message )
 			int valueIndex = info.item.iItem;
 			//component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
 
-			return new Result( 1 );
+			return new ui::Result( 1 );
 		}
 		case ListView::Notify::BeginLabelEditW:
-			return new Result( m_sceneViewer->IsEditing() ? 0 : 1 );
+			return new ui::Result( m_sceneViewer->IsEditing() ? 0 : 1 );
 		}
 	}
 	return new Unhandled();

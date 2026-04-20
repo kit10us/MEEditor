@@ -234,6 +234,10 @@ void SceneViewer::UpdateObjectList()
 	Combobox* sceneCombobox = GetControl< Combobox* >( "SceneCombobox" );
 	Listbox* objectListbox = GetControl<Listbox*>( "ObjectList" );
 
+	objectListbox->SetText("");
+
+	auto class_name = objectListbox->GetClassName();
+
 	objectListbox->ResetContent();
 	
 	int sceneIndex = sceneCombobox->GetCurSel();
@@ -472,7 +476,7 @@ void SceneViewer::OpenObjectComponent()
 		return;
 	}
 
-	if ( unify::string::StringIs( component->GetTypeName(), "LUAScript" ) )
+	if ( unify::String::StringIs( component->GetTypeName(), "LUAScript" ) )
 	{
 		unify::Path path( component->GetLookup()->GetValue( "path" ) );
 		unify::Path fullPath( m_game->GetOS()->GetOSParameters()->GetRunPath(), path );
@@ -546,7 +550,7 @@ ui::IResult* SceneViewer::OnAfterCreate( ui::message::Params )
 
 	m_timer = SetTimer( 0, 10 );
 
-	return new Result(0);
+	return new ui::Result(0);
 }
 
 ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message )
@@ -568,7 +572,7 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 		{
 		case Listbox::Event::SelChange:
 			UpdateObject_All();
-			return new Result(0);
+			return new ui::Result(0);
 		}
 	}
 	else if ( message.IsFor( "Components" ) )
@@ -577,10 +581,10 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 		{
 		case Listbox::Event::SelChange:
 			UpdateObject_ComponentValues();
-			return new Result( 0 );
+			return new ui::Result( 0 );
 		case Listbox::Event::DblClick:
 			OpenObjectComponent();
-			return new Result( 0 );
+			return new ui::Result( 0 );
 		}	  
 	}
 	else if ( message.IsFor( "EditScene" ) )
@@ -589,7 +593,7 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 		{
 		case Button::Event::Clicked:
 			EditScene( !m_editingLock );
-			return new Result( 0 );
+			return new ui::Result( 0 );
 		}
 	}
 
@@ -700,7 +704,7 @@ ui::IResult* SceneViewer::OnTimer( ui::message::Timer message )
 	}
 
 	UpdateObject_Position();
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* SceneViewer::OnNotify( ui::message::Notify message )
@@ -737,10 +741,10 @@ ui::IResult* SceneViewer::OnNotify( ui::message::Notify message )
 			int valueIndex = info.item.iItem;
 			component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
 
-			return new Result( 1 );
+			return new ui::Result( 1 );
 		}
 		case ListView::Notify::BeginLabelEditW:
-			return new Result( IsEditing() ? 0 : 1 );
+			return new ui::Result( IsEditing() ? 0 : 1 );
 		}
 	}
 	return new Unhandled();
@@ -753,7 +757,7 @@ ui::IResult* SceneViewer::OnMenuCommand( ui::message::MenuCommand message )
 	if ( message.IsFor( "Quit Game" ) )
 	{
 		m_game->Quit();
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if (message.IsFor("Restart Scene"))
 	{
@@ -764,32 +768,32 @@ ui::IResult* SceneViewer::OnMenuCommand( ui::message::MenuCommand message )
 	else if ( message.IsFor( "Exit Scene Viewer" ) )
 	{
 		Destroy();
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor( "Components" ) )
 	{
 		OpenComponentViewer( std::string(), -1 );
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor( "Assets" ) )
 	{
 		OpenResourceBrowser();
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor(  "Inputs" ) )
 	{
 		OpenInputBrowser();
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor( "ScriptEditor" ) )
 	{
 		OpenScriptEditor( unify::Path() );
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor( "Log" ) )
 	{
 		OpenLogViewer();
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 
 	return new Unhandled();
@@ -804,26 +808,26 @@ ui::IResult* SceneViewer::OnUser( ui::message::User message )
 	case RESOURCEBROWSER_CLOSED:
 		m_resourceBrowser.reset();
 		m_openChildren--;
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	case INPUTBROWSER_CLOSED:
 		m_inputBrowser.reset();
 		m_openChildren--;
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	case SCRIPTEDITOR_CLOSED:
 		m_scriptEditor.reset();
 		m_openChildren--;
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	case LOGVIEWER_CLOSED:
 		m_logViewer.reset();
 		m_openChildren--;
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	case SCRIPTEDITOR_OPEN:
 		OpenScriptEditor( message.params.lParam ? unify::Path( (char*)message.params.lParam ) : unify::Path() );
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	case COMPONENTVIEWER_CLOSED:
 		m_componentViewer.reset();
 		m_openChildren--;
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	return new Unhandled();
 }

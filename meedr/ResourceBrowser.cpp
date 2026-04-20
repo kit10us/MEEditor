@@ -113,7 +113,7 @@ ui::IResult * ResourceBrowser::OnCreate( ui::message::Params params )
 {
 	using namespace ui;			  
 
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ResourceBrowser::OnDestroy( ui::message::Params params )
@@ -121,7 +121,7 @@ ui::IResult * ResourceBrowser::OnDestroy( ui::message::Params params )
 	using namespace ui;			  
 
 	GetParent()->SendUserMessage( RESOURCEBROWSER_CLOSED, message::Params{ 0, 0 } );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ResourceBrowser::OnAfterCreate( ui::message::Params )
@@ -129,7 +129,7 @@ ui::IResult * ResourceBrowser::OnAfterCreate( ui::message::Params )
 	using namespace ui;			  
 
 	UpdateResourceTypes();
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * ResourceBrowser::OnControlCommand( ui::message::ControlCommand message )
@@ -165,5 +165,5 @@ ui::IResult * ResourceBrowser::OnControlCommand( ui::message::ControlCommand mes
 			break;
 		}
 	}
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }			

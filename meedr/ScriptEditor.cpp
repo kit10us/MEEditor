@@ -118,7 +118,7 @@ void ScriptEditor::LoadFile( unify::Path path )
 ui::IResult* ScriptEditor::OnCreate( ui::message::Params params )
 {
 	using namespace ui;			  
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* ScriptEditor::OnAfterCreate( ui::message::Params params )
@@ -127,7 +127,7 @@ ui::IResult* ScriptEditor::OnAfterCreate( ui::message::Params params )
 
 	Button* save = GetControl< Button* >( "save" );
 	save->SetEnable( false );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* ScriptEditor::OnDestroy( ui::message::Params params )
@@ -135,7 +135,7 @@ ui::IResult* ScriptEditor::OnDestroy( ui::message::Params params )
 	using namespace ui;			  
 
 	GetParent()->SendUserMessage( SCRIPTEDITOR_CLOSED, message::Params{} );
-	return new Result(0);
+	return new ui::Result(0);
 }
 
 ui::IResult* ScriptEditor::OnControlCommand( ui::message::ControlCommand message )
@@ -144,7 +144,7 @@ ui::IResult* ScriptEditor::OnControlCommand( ui::message::ControlCommand message
 
 	if ( message.IsFor( "Save" ) )
 	{
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	else if ( message.IsFor( "Load" ) )
 	{
@@ -166,7 +166,7 @@ ui::IResult* ScriptEditor::OnControlCommand( ui::message::ControlCommand message
 		else
 		{
 		}
-		return new Result( 0 );
+		return new ui::Result( 0 );
 	}
 	return new Unhandled();
 }

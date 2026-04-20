@@ -77,8 +77,8 @@ void InputBrowser::UpdateInputData()
 	case me::input::InputType::Tracker:
 	{
 		me::input::TrackerData * data( reinterpret_cast<me::input::TrackerData*>(dataRaw.get()) );
-		dataString += std::string( "position: " ) + data->position.ToString();
-		dataString += std::string( "\nchange:   " ) + data->change.ToString();
+		dataString += std::string( "position: " ) + unify::Cast(data->position);
+		dataString += std::string( "\nchange:   " ) + unify::Cast(data->change);
 		break;
 	}
 	case me::input::InputType::Trigger:
@@ -90,7 +90,7 @@ void InputBrowser::UpdateInputData()
 	case me::input::InputType::Stick:
 	{
 		me::input::StickData * data( reinterpret_cast<me::input::StickData*>(dataRaw.get()) );
-		dataString += std::string( "axis:     " ) + data->axis.ToString();
+		dataString += std::string( "axis:     " ) + unify::Cast(data->axis);
 		break;
 	}
 	}
@@ -175,7 +175,7 @@ ui::IResult* InputBrowser::OnAfterCreate( ui::message::Params params )
 	UpdateInputManagerList();
 	UpdateInputDeviceInputList();
 	m_updateData = std::thread( &InputBrowser::Timer_UpdateInputData, this );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult * InputBrowser::OnDestroy( ui::message::Params params )
@@ -183,7 +183,7 @@ ui::IResult * InputBrowser::OnDestroy( ui::message::Params params )
 	using namespace ui;
 
 	GetParent()->SendUserMessage( INPUTBROWSER_CLOSED, message::Params{} );
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* InputBrowser::OnControlCommand( ui::message::ControlCommand message )
@@ -202,7 +202,7 @@ ui::IResult* InputBrowser::OnControlCommand( ui::message::ControlCommand message
 		}
 	}
 
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
 ui::IResult* InputBrowser::OnUser( ui::message::User message )
@@ -217,6 +217,6 @@ ui::IResult* InputBrowser::OnUser( ui::message::User message )
 		break;
 	}		
 	}
-	return new Result( 0 );
+	return new ui::Result( 0 );
 }
 
