@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <port/win/Windows.h>
+#include <port/win/general.h>
 
 void OpenEditor();
 void DestroyEditor();
