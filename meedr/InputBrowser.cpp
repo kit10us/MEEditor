@@ -3,6 +3,7 @@
 
 #include <meedr/SceneViewer.h>
 #include <meedr/InputBrowser.h>
+#include <unify/Cast.h>
 
 using namespace meedr;
 

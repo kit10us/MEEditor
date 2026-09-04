@@ -11,6 +11,7 @@
 #include <meedr/ComponentViewer.h>
 #include <wab/ui/Builder.h>
 #include <me/debug/Block.h>
+#include <unify/Cast.h>
 
 #include <Richedit.h>
 #include <ShObjIdl.h>
@@ -335,9 +336,9 @@ void SceneViewer::UpdateObject_Position( bool force )
 		else
 		{
 			unify::V3< float > position( object->GetFrame().GetPosition() );
-			std::string xs = unify::Cast< std::string >( position.x );
-			std::string ys = unify::Cast< std::string >( position.y );
-			std::string zs = unify::Cast< std::string >( position.z );
+			std::string xs = *unify::ToString( position.x );
+			std::string ys = *unify::ToString( position.y );
+			std::string zs = *unify::ToString( position.z );
 
 			if ( x->GetText() != xs )
 			{
@@ -739,7 +740,7 @@ ui::IResult* SceneViewer::OnNotify( ui::message::Notify message )
 			auto component = object->GetComponent( componentIndex );
 
 			int valueIndex = info.item.iItem;
-			component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
+			component->GetLookup()->SetValue( valueIndex, *unify::ToString( std::wstring( info.item.pszText ) ) );
 
 			return new ui::Result( 1 );
 		}

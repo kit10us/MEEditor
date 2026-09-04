@@ -7,6 +7,7 @@
 #include <wab/ui/Window.h>
 #include <me/render/Geometry.h>
 #include <me/debug/Block.h>
+#include <unify/Cast.h>
 
 using namespace meedr;
 
@@ -440,7 +441,7 @@ ui::IResult* ComponentViewer::OnNotify( ui::message::Notify message )
 			}	
 
 			int valueIndex = info.item.iItem;
-			//component->GetLookup()->SetValue( valueIndex, unify::Cast< std::string >( std::wstring( info.item.pszText ) ) );
+			//component->GetLookup()->SetValue( valueIndex, *unify::ToString( std::wstring( info.item.pszText ) ) );
 
 			return new ui::Result( 1 );
 		}
