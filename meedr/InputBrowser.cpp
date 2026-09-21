@@ -78,20 +78,20 @@ void InputBrowser::UpdateInputData()
 	case me::input::InputType::Tracker:
 	{
 		me::input::TrackerData * data( reinterpret_cast<me::input::TrackerData*>(dataRaw.get()) );
-		dataString += std::string( "position: " ) + unify::Cast(data->position);
-		dataString += std::string( "\nchange:   " ) + unify::Cast(data->change);
+		dataString += std::string( "position: " ) + unify::ToString(data->position);
+		dataString += std::string( "\nchange:   " ) + unify::ToString(data->change);
 		break;
 	}
 	case me::input::InputType::Trigger:
 	{
 		me::input::TriggerData * data( reinterpret_cast<me::input::TriggerData*>(dataRaw.get()) );
-		dataString += std::string( "value:    " ) + unify::Cast< std::string >( data->value );
+		dataString += std::string( "value:    " ) + unify::ToString( data->value );
 		break;
 	}
 	case me::input::InputType::Stick:
 	{
 		me::input::StickData * data( reinterpret_cast<me::input::StickData*>(dataRaw.get()) );
-		dataString += std::string( "axis:     " ) + unify::Cast(data->axis);
+		dataString += std::string( "axis:     " ) + unify::ToString(data->axis);
 		break;
 	}
 	}

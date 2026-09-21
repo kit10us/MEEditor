@@ -233,8 +233,8 @@ void ComponentViewer::UpdateComponentValues()
 		auto end = component->GetLookup()->end();
 		for ( auto itr = begin; itr != end; itr++ )
 		{
-			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+			valuesList->InsertItem( 0, i, unify::ToWString( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::ToWString( itr->key ) );
 		}
 		break;
 	}
@@ -251,8 +251,8 @@ void ComponentViewer::UpdateComponentValues()
 		auto end = component->GetLookup()->end();
 		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+			valuesList->InsertItem( 0, i, unify::ToWString( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::ToWString( itr->key ) );
 		}
 		break;
 	}
@@ -270,8 +270,8 @@ void ComponentViewer::UpdateComponentValues()
 		auto end = component->GetLookup()->end();
 		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+			valuesList->InsertItem( 0, i, unify::ToWString( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::ToWString( itr->key ) );
 		}
 		break;
 	}
@@ -294,8 +294,8 @@ void ComponentViewer::UpdateComponentValues()
 		auto end = component->GetLookup()->end();
 		for (auto itr = begin; itr != end; itr++)
 		{
-			valuesList->InsertItem( 0, i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			valuesList->InsertItem( 1, i, unify::Cast< std::wstring >( itr->key ) );
+			valuesList->InsertItem( 0, i, unify::ToWString( itr->value->ToString() ) );
+			valuesList->InsertItem( 1, i, unify::ToWString( itr->key ) );
 		}
 		break;
 	}
@@ -441,7 +441,7 @@ ui::IResult* ComponentViewer::OnNotify( ui::message::Notify message )
 			}	
 
 			int valueIndex = info.item.iItem;
-			//component->GetLookup()->SetValue( valueIndex, *unify::ToString( std::wstring( info.item.pszText ) ) );
+			//component->GetLookup()->SetValue( valueIndex, unify::ToString( std::wstring( info.item.pszText ) ) );
 
 			return new ui::Result( 1 );
 		}

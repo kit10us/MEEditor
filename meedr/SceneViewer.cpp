@@ -336,9 +336,9 @@ void SceneViewer::UpdateObject_Position( bool force )
 		else
 		{
 			unify::V3< float > position( object->GetFrame().GetPosition() );
-			std::string xs = *unify::ToString( position.x );
-			std::string ys = *unify::ToString( position.y );
-			std::string zs = *unify::ToString( position.z );
+			std::string xs = unify::ToString( position.x );
+			std::string ys = unify::ToString( position.y );
+			std::string zs = unify::ToString( position.z );
 
 			if ( x->GetText() != xs )
 			{
@@ -444,8 +444,8 @@ void SceneViewer::UpdateObject_ComponentValues()
 		auto begin = component->GetLookup()->begin();
 		for( auto itr = begin; itr != end; ++itr )
 		{
-			values->InsertItem( 0, (int)i, unify::Cast< std::wstring >( itr->value->ToString() ) );
-			values->InsertItem( 1, (int)i, unify::Cast< std::wstring >( itr->key ) );
+			values->InsertItem( 0, (int)i, unify::ToWString( itr->value->ToString() ) );
+			values->InsertItem( 1, (int)i, unify::ToWString( itr->key ) );
 		}
 	}
 }
@@ -608,7 +608,11 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 			{
 			case Edit::Event::Change:
 			{
-				float x( unify::Cast< float >( message.control->GetText() ) );
+				auto x = unify::FromString< float >( message.control->GetText() );
+				if (!x)
+				{
+					return nullptr;
+				}
 
 				Combobox* sceneCombobox = GetControl< Combobox* >( "SceneCombobox" );
 				Listbox* objectListbox = GetControl< Listbox* >( "ObjectList" );
@@ -626,7 +630,7 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 				}
 
 				auto position( object->GetFrame().GetPosition() );
-				position.x = x;
+				position.x = *x;
 				object->GetFrame().SetPosition( position );
 				break;
 			}
@@ -638,7 +642,11 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 			{
 			case Edit::Event::Change:
 			{
-				float y( unify::Cast< float >( message.control->GetText() ) );
+				auto y = unify::FromString< float >( message.control->GetText());
+				if (!y)
+				{
+					return nullptr;
+				}
 
 				Combobox* sceneCombobox = GetControl< Combobox* >( "SceneCombobox" );
 				Listbox* objectListbox = GetControl< Listbox* >( "ObjectList" );
@@ -656,7 +664,7 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 				}
 
 				auto position( object->GetFrame().GetPosition() );
-				position.y = y;
+				position.y = *y;
 				object->GetFrame().SetPosition( position );
 				break;
 			}
@@ -668,7 +676,11 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 			{
 			case Edit::Event::Change:
 			{
-				float z( unify::Cast< float >( message.control->GetText() ) );
+				auto z = unify::FromString< float >( message.control->GetText() );
+				if (!z)
+				{
+					return nullptr;
+				}
 
 				Combobox* sceneCombobox = GetControl< Combobox* >( "SceneCombobox" );
 				Listbox* objectListbox = GetControl< Listbox* >( "ObjectList" );
@@ -686,7 +698,7 @@ ui::IResult* SceneViewer::OnControlCommand( ui::message::ControlCommand message 
 				}
 
 				auto position( object->GetFrame().GetPosition() );
-				position.z = z;
+				position.z = *z;
 				object->GetFrame().SetPosition( position );
 				break;
 			}
@@ -740,7 +752,7 @@ ui::IResult* SceneViewer::OnNotify( ui::message::Notify message )
 			auto component = object->GetComponent( componentIndex );
 
 			int valueIndex = info.item.iItem;
-			component->GetLookup()->SetValue( valueIndex, *unify::ToString( std::wstring( info.item.pszText ) ) );
+			component->GetLookup()->SetValue( valueIndex, unify::ToString( std::wstring( info.item.pszText ) ) );
 
 			return new ui::Result( 1 );
 		}
@@ -762,7 +774,7 @@ ui::IResult* SceneViewer::OnMenuCommand( ui::message::MenuCommand message )
 	}
 	else if (message.IsFor("Restart Scene"))
 	{
-		m_sceneManager->RestartScene();
+		auto result = m_sceneManager->RestartScene(); // SAS TODO: Handle.
 		UpdateSceneList();
 		GetParent()->SetForegroundWindow();
 	}

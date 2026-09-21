@@ -30,7 +30,7 @@ void ScriptEditor::LoadFile( unify::Path path )
 
 	Richtext* text = GetControl< Richtext* >( "Text" );
 
-	if ( path.Empty() )
+	if ( path.IsEmpty() )
 	{
 		text->SetText( "" );
 		text->SetEnable( false );
