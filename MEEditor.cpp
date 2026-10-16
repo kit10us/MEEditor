@@ -31,13 +31,19 @@ void DestroyEditor()
 extern "C" __declspec(dllexport) bool MELoader( me::game::IGame * gameInstance, const qxml::Element * element )
 {
 	s_game = gameInstance;
+	auto debug = gameInstance->Debug();
 	s_ownership = unify::Owner::Create( "MEEditor" );
 
 	s_rootWindow.reset(new ui::Window((HWND)gameInstance->GetOS()->GetOSParameters()->handle));
 
 	{
 		auto component = new meedr::ActionsGameComponent();
-		gameInstance->AddComponent( me::game::component::IGameComponent::ptr( component ) );
+		auto result = gameInstance->AddComponent( me::game::component::IGameComponent::ptr( component ) );
+		if (!result)
+		{
+			debug->GetLogger()->Log(result.Message());
+			return false; // SAS TODO: Need to report failure to the game
+		}
 	}
 
 	me::input::InputManager * inputManager = gameInstance->GetInputManager();

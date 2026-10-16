@@ -31,8 +31,6 @@ SceneViewer::SceneViewer( ui::IWindow::ptr parent, me::game::IGame * gameInstanc
 	, m_noScenes{ true }
 	, m_block{ gameInstance->Debug()->GetLogger()->CreateBlock( "SceneViewer" ) }
 {
-	auto block{ m_block->SubBlock( "ctor" ) };
-
 	int nCmdShow = gameInstance->GetOS()->GetOSParameters()->nCmdShow;
 	RECT rect{};
 	::GetWindowRect( GetParentHandle(), &rect );

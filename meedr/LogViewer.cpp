@@ -18,8 +18,10 @@ LogViewer::LogViewer( SceneViewer* parent, int nCmdShow, int x, int y, me::game:
 	, m_game{ gameInstance }
 {
 	using namespace create;
-	AddContainer( new container::StackPanel( container::Stack::Horizontal, 640, 480 ) );
+	AddContainer( new container::StackPanel( container::Stack::Vertical, 640, 480 ) );
 	AddControl( (new Richtext( FillWidth(), FillHeight() ))->/*SetMultiline( true )->*/SetReadonly( true )->SetAutoHScroll( true )->SetVScroll( true ), "LogText" );
+	AddControl( new Edit( FillWidth(), DefaultHeight()), "Edit_Command");
+
 	Window::Create( L"Log Viewer", x, y, nCmdShow );
 }
 
@@ -33,7 +35,7 @@ void LogViewer::Log( std::string text )
 	using namespace ui;			  
 
 	Richtext* logText = GetControl< Richtext* >( "LogText" );
-	logText->AppendText( text  );
+	logText->AppendText( text + "\n" );
 }
 
 ui::IResult* LogViewer::OnCreate( ui::message::Params params )
